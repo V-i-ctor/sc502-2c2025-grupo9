@@ -1,0 +1,81 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.perfil-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    text-align: right;
+    z-index: 20;
+}
+
+.perfil-btn button {
+    width: 100px;
+    height: 60px;
+    border-radius: 50px;
+    background-color: #ffb6b9;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.perfil-btn button:hover {
+    background-color: #fa9ca1;
+    transform: translateY(-2px);
+}
+
+.menu-oculto {
+    display: none;
+    position: absolute;
+    right: 0;
+    margin-top: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    z-index: 10;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    min-width: 180px;
+}
+
+.menu-oculto button {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+    background-color: #ffdac1;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.menu-oculto button:hover {
+    background-color: #ffe0cc;
+}
+
+.menu-oculto.mostrar {
+    display: block;
+}
+
+@media (max-width: 640px) {
+    .perfil-btn {
+        top: 10px;
+        right: 10px;
+    }
+
+    .perfil-btn button {
+        width: 80px;
+        height: 50px;
+        font-size: 0.875rem;
+    }
+
+    .menu-oculto {
+        min-width: 150px;
+    }
+}
