@@ -1,17 +1,85 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Mi Perfil</title>
-  <link rel="stylesheet" href="estilos.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Perfil - Salud Mental</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="estilos.css" />
+    <style>
+        /* Estilos adicionales para el menú desplegable */
+        .menu-oculto {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            right: 0;
+            top: 100%; /* Posicionar debajo del botón */
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .menu-oculto.mostrar {
+            display: block;
+        }
+
+        .menu-oculto button {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            text-align: left;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .menu-oculto button:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
 </head>
-<body>
-  <h1>Mi Perfil</h1>
-  <button>Historial Emocional</button>
-  <button>Citas Programadas</button>
-  <button>Recursos Guardados</button>
-  <button>Panel Psicólogo</button>
-  <br><br>
-  <button onclick="location.href='index.html'">Cerrar Sesión</button>
-</body>
-</html>
+<body class="bg-gray-50 min-h-screen flex flex-col items-center text-gray-800">
+    <header class="w-full bg-white shadow-md p-4 flex justify-between items-center relative rounded-b-lg">
+        <h1 class="text-3xl font-extrabold text-blue-600 ml-4 md:ml-8">Bienvenidos a Salud Mental</h1>
+        <div class="perfil-btn relative">
+            <button class="text-sm md:text-base bg-blue-500 text-white py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition duration-300" onclick="toggleMenu()">Perfil</button>
+            <div id="perfilMenu" class="menu-oculto">
+                <button onclick="location.href='perfil.html'">Ingresar como Psicólogo</button>
+                <button onclick="location.href='perfil.html'">Información de Usuario</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow w-full max-w-4xl p-4 md:p-8 mt-8">
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-8 text-center">Mi Perfil</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <button onclick="location.href='historial_emocional.html'" class="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:-translate-y-1 text-lg text-center">
+                Historial Emocional
+            </button>
+            <button onclick="location.href='citas_programadas.html'" class="bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:from-green-600 hover:to-green-700 transition duration-300 ease-in-out transform hover:-translate-y-1 text-lg text-center">
+                Citas Programadas
+            </button>
+            <button onclick="location.href='recursos_guardados.html'" class="bg-gradient-to-r from-purple-500 to-purple-600 text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:from-purple-600 hover:to-purple-700 transition duration-300 ease-in-out transform hover:-translate-y-1 text-lg text-center">
+                Recursos Guardados
+            </button>
+            <button onclick="location.href='panel_psicologo.html'" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:from-orange-600 hover:to-orange-700 transition duration-300 ease-in-out transform hover:-translate-y-1 text-lg text-center">
+                Panel Psicólogo
+            </button>
+        </div>
+
+        <div class="text-center mt-12">
+            <button onclick="location.href='login.html'" class="bg-red-500 text-white font-semibold py-3 px-6 rounded-lg shadow hover:bg-red-600 transition duration-300 ease-in-out">
+                Cerrar Sesión
+            </button>
+        </div>
+    </main>
+
+    <footer class="w-full bg-gray-800 text-white p-6 text-center mt-auto rounded-t-lg shadow-inner">
+        <p class="mb-2">📞 Teléfono: <span class="font-semibold">+506 1234-5678</span> | ✉️ Correo: <span class="font-semibold">saludmental@ficticio.com</span></p>
+        <p class="mb-2
