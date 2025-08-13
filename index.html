@@ -1,60 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Salud Mental</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="estilos.css" />
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col items-center text-gray-800">
-    <header class="w-full bg-white shadow-md p-4 flex justify-between items-center relative rounded-b-lg">
-        <h1 class="text-3xl font-extrabold text-blue-600 ml-4 md:ml-8">Bienvenidos a Salud Mental</h1>
-        <div class="perfil-btn">
-            <button class="text-sm md:text-base" onclick="toggleMenu()">Perfil</button>
-            <div id="perfilMenu" class="menu-oculto">
-                <button onclick="location.href='perfil.html'">Ingresar como Psicólogo</button>
-                <button onclick="location.href='perfil.html'">Información de Usuario</button>
-            </div>
-        </div>
-    </header>
-
-    <main class="flex-grow w-full max-w-4xl p-4 md:p-8 mt-8">
-        <section class="opciones grid grid-cols-1 md:grid-cols-3 gap-6">
-            <button onclick="location.href='auto.html'" class="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:-translate-y-1">
-                Autoevaluaciones
-            </button>
-            <button onclick="location.href='tecnicas.html'" class="bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:from-green-600 hover:to-green-700 transition duration-300 ease-in-out transform hover:-translate-y-1">
-                Técnicas de Manejo del Estrés
-            </button>
-            <button onclick="location.href='usuarios.html'" class="bg-gradient-to-r from-purple-500 to-purple-600 text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:from-purple-600 hover:to-purple-700 transition duration-300 ease-in-out transform hover:-translate-y-1">
-                Contenido Educativo
-            </button>
-        </section>
-    </main>
-
-    <footer class="w-full bg-gray-800 text-white p-6 text-center mt-auto rounded-t-lg shadow-inner">
-        <p class="mb-2">📞 Teléfono: <span class="font-semibold">+506 1234-5678</span> | ✉️ Correo: <span class="font-semibold">saludmental@ficticio.com</span></p>
-        <p class="mb-2">🌐 Redes: <span class="font-semibold">@SaludMentalCR</span> en Instagram, Facebook y Twitter</p>
-        <p class="text-gray-400 text-sm">© 2025 Salud Mental. Todos los derechos reservados.</p>
-    </footer>
-l
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('perfilMenu');
-            menu.classList.toggle('mostrar');
-        }
-
-        document.addEventListener('click', function(event) {
-            const perfilBtn = document.querySelector('.perfil-btn button');
-            const perfilMenu = document.getElementById('perfilMenu');
-
-            if (!perfilBtn.contains(event.target) && !perfilMenu.contains(event.target)) {
-                if (perfilMenu.classList.contains('mostrar')) {
-                    perfilMenu.classList.remove('mostrar');
-                }
-            }
-        });
-    </script>
+<body>
+<h1>Prueba</h1>
+<h1>Prueba Branch Victor</h1>
 </body>
 </html>
