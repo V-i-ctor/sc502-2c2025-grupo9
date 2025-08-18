@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,9 +8,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="estilos.css" />
     <style>
-        
+
     </style>
 </head>
+
 <body class="bg-gray-50 min-h-screen flex flex-col items-center text-gray-800">
     <header class="w-full bg-white shadow-md p-4 flex justify-between items-center relative rounded-b-lg">
         <h1 class="text-3xl font-extrabold text-blue-600 ml-4 md:ml-8">Bienvenidos a Salud Mental</h1>
@@ -24,36 +26,44 @@
 
     <main class="flex-grow w-full max-w-4xl p-4 md:p-8 mt-8">
         <h2 class="text-4xl font-extrabold text-gray-900 mb-8 text-center">Autoevaluaciones</h2>
-        
+
         <div class="flex flex-col md:flex-row justify-center items-center gap-6">
-            <button onclick="location.href='videosAutoevaluacion.html'" class="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold py-4 px-8 rounded-xl shadow-lg hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:-translate-y-1 text-lg">
+            <button onclick="location.href='videosAutoevaluacion.html'"
+                class="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold py-4 px-8 rounded-xl shadow-lg hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:-translate-y-1 text-lg">
                 Ver Videos
             </button>
-            <button onclick="location.href='articulosAutoevaluacion.html'" class="bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold py-4 px-8 rounded-xl shadow-lg hover:from-green-600 hover:to-green-700 transition duration-300 ease-in-out transform hover:-translate-y-1 text-lg">
+            <button onclick="location.href='articulosAutoevaluacion.html'"
+                class="bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold py-4 px-8 rounded-xl shadow-lg hover:from-green-600 hover:to-green-700 transition duration-300 ease-in-out transform hover:-translate-y-1 text-lg">
                 Ver Artículos
+            </button>
+            <button onclick="location.href='formularioAutoevaluacion.html'"
+                class="bg-gradient-to-r from-purple-500 to-purple-600 text-white font-semibold py-4 px-8 rounded-xl shadow-lg hover:from-purple-600 hover:to-purple-700 transition duration-300 ease-in-out transform hover:-translate-y-1 text-lg">
+                Hacer Autoevaluación
             </button>
         </div>
 
         <div class="mt-12 text-center">
-            <button onclick="history.back()" class="bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-lg shadow hover:bg-gray-400 transition duration-300 ease-in-out">
+            <button onclick="history.back()"
+                class="bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-lg shadow hover:bg-gray-400 transition duration-300 ease-in-out">
                 Volver
             </button>
         </div>
     </main>
 
     <footer class="w-full bg-gray-800 text-white p-6 text-center mt-auto rounded-t-lg shadow-inner">
-        <p class="mb-2">📞 Teléfono: <span class="font-semibold">+506 1234-5678</span> | ✉️ Correo: <span class="font-semibold">saludmental@ficticio.com</span></p>
+        <p class="mb-2">📞 Teléfono: <span class="font-semibold">+506 1234-5678</span> | ✉️ Correo: <span
+                class="font-semibold">saludmental@ficticio.com</span></p>
         <p class="mb-2">🌐 Redes: <span class="font-semibold">@SaludMentalCR</span> en Instagram, Facebook y Twitter</p>
         <p class="text-gray-400 text-sm">© 2025 Salud Mental. Todos los derechos reservados.</p>
     </footer>
-    
+
     <script>
         function toggleMenu() {
             const menu = document.getElementById('perfilMenu');
             menu.classList.toggle('mostrar');
         }
 
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             const perfilBtn = document.querySelector('.perfil-btn button');
             const perfilMenu = document.getElementById('perfilMenu');
 
@@ -65,4 +75,5 @@
         });
     </script>
 </body>
+
 </html>
