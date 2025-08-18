@@ -5,7 +5,7 @@ session_start();
 $id_usuario = $_SESSION['id_usuario'] ?? 1; 
 
 // Incluir conexión
-require_once __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/app/config/db.php';
 
 // Recibir datos del formulario
 $estado = $_POST['estado_emocional'] ?? '';
