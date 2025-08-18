@@ -18,8 +18,10 @@ if ($estado && $puntaje && $recomendacion) {
     $stmt->bind_param("isis", $id_usuario, $estado, $puntaje, $recomendacion);
 
     if ($stmt->execute()) {
-        header("Location: formulario_autoevaluacion.html?success=1");
-        exit;
+
+    header("Location: formularioAutoevaluacion.html?success=1");
+    exit;
+
     } else {
         echo "Error al guardar: " . $stmt->error;
     }
