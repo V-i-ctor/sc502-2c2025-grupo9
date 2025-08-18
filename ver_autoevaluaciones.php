@@ -34,7 +34,7 @@ $conn->close();
         <tr class="bg-gray-200">
           <th class="px-4 py-2 text-left">Fecha</th>
           <th class="px-4 py-2 text-left">Estado</th>
-          <th class="px-4 py-2 text-left">Puntaje</th>
+          <th class="px-4 py-2 text-left">Motivación (1-5)</th>
           <th class="px-4 py-2 text-left">Recomendación</th>
         </tr>
       </thead>
