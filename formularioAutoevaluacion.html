@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autoevaluación Emocional</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col items-center text-gray-800">
+
+  <header class="w-full bg-white shadow-md p-4 flex justify-between items-center rounded-b-lg">
+    <h1 class="text-2xl font-bold text-blue-600">Autoevaluación Emocional</h1>
+    <button onclick="location.href='auto.html'" class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">Volver</button>
+  </header>
+
+  <main class="flex-grow w-full max-w-2xl p-6">
+    <h2 class="text-xl font-semibold mb-4">Responde sinceramente a las siguientes preguntas</h2>
+    
+    <form action="guardar_autoevaluacion.php" method="POST" class="bg-white shadow rounded-lg p-6 space-y-6">
+      
+      <!-- Pregunta 1 -->
+      <div>
+        <label class="font-medium">1. ¿Cómo te sientes hoy?</label>
+        <select name="estado_emocional" required class="w-full mt-2 p-2 border rounded">
+          <option value="">Selecciona una opción</option>
+          <option value="Feliz">Feliz</option>
+          <option value="Triste">Triste</option>
+          <option value="Ansioso">Ansioso</option>
+          <option value="Enojado">Enojado</option>
+          <option value="Motivado">Motivado</option>
+        </select>
+      </div>
+
+      <!-- Pregunta 2 -->
+      <div>
+        <label class="font-medium">2. ¿Qué tan motivado te sientes (1–5)?</label>
+        <div class="flex gap-4 mt-2">
+          <label><input type="radio" name="puntaje" value="1" required> 1</label>
+          <label><input type="radio" name="puntaje" value="2"> 2</label>
+          <label><input type="radio" name="puntaje" value="3"> 3</label>
+          <label><input type="radio" name="puntaje" value="4"> 4</label>
+          <label><input type="radio" name="puntaje" value="5"> 5</label>
+        </div>
+      </div>
+
+      <!-- Pregunta 3 -->
+      <div>
+        <label class="font-medium">3. ¿Qué te recomendarías a ti mismo hoy?</label>
+        <textarea name="recomendacion" rows="3" class="w-full mt-2 p-2 border rounded" required></textarea>
+      </div>
+
+      <!-- Botón -->
+      <div class="text-center">
+        <button type="submit" class="bg-gradient-to-r from-purple-500 to-purple-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:from-purple-600 hover:to-purple-700 transition duration-300 ease-in-out">
+          Enviar Autoevaluación
+        </button>
+      </div>
+    </form>
+
+    <!-- Resultados previos -->
+    <section class="mt-10">
+      <h2 class="text-lg font-semibold mb-4">Tus autoevaluaciones anteriores</h2>
+      <iframe src="ver_autoevaluaciones.php" class="w-full h-64 border rounded"></iframe>
+    </section>
+  </main>
+
+  <footer class="w-full bg-gray-800 text-white p-6 text-center mt-auto rounded-t-lg shadow-inner">
+    <p class="text-gray-400 text-sm">© 2025 Salud Mental. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>
