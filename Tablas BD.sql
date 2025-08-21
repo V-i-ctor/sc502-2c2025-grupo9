@@ -90,3 +90,24 @@ CREATE TABLE mensajes_chat (
     FOREIGN KEY (id_chat) REFERENCES sesiones_chat(id_chat) ON DELETE CASCADE,
     FOREIGN KEY (id_emisor) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
+
+-- TABLA DE ARTÍCULOS
+CREATE TABLE articulos (
+    id_articulo INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(200) NOT NULL,
+    resumen TEXT,
+    contenido TEXT,
+    imagen_url TEXT,
+    autor VARCHAR(100),
+    fecha_publicacion DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- TABLA DE VIDEOS
+CREATE TABLE videos (
+    id_video INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(200) NOT NULL,
+    descripcion TEXT,
+    autor VARCHAR(100),
+    url_video TEXT,
+    fecha_publicacion DATETIME DEFAULT CURRENT_TIMESTAMP
+);
