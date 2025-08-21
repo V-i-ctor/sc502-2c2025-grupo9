@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat en Vivo</title>
+    <!-- Tailwind CSS CDN para estilos modernos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Material Icons para los iconos -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 0.5rem;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen font-sans text-gray-800">
+    <!-- Sección de Chat en vivo -->
+    <div class="flex-1 flex flex-col max-w-2xl mx-auto p-4 sm:p-6 lg:p-8 animate-fade-in min-h-screen">
+        <!-- Botón para volver al panel principal -->
+        <button id="back-to-main" class="self-start mb-6 flex items-center text-gray-600 hover:text-blue-500 transition-colors">
+            <span class="material-icons transform rotate-180">chevron_right</span>
+            <span class="ml-2 font-medium">Volver al Panel Principal</span>
+        </button>
+
+        <!-- Título del chat -->
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Chat en vivo</h2>
+
+        <!-- Contenedor de mensajes de chat -->
+        <div id="chat-messages-container" class="flex-1 overflow-y-auto chat-messages bg-white rounded-2xl shadow-inner p-4 mb-4 space-y-4">
+            <!-- Mensaje de bienvenida del bot -->
+            <div class="flex items-start space-x-2">
+                <span class="material-icons text-2xl text-blue-500">psychology</span>
+                <div class="bg-blue-100 text-blue-800 p-3 rounded-r-2xl rounded-bl-2xl max-w-xs">
+                    <p class="text-sm font-medium">¡Hola! Soy tu asistente de bienestar. Estoy aquí para escucharte y apoyarte. ¿En qué puedo ayudarte hoy?</p>
+                </div>
+            </div>
+            <!-- Mensaje de ejemplo del usuario -->
+            <div class="flex items-end justify-end">
+                <div class="bg-gray-700 text-white p-3 rounded-l-2xl rounded-br-2xl max-w-xs">
+                    <p class="text-sm font-medium">Hola, a veces me siento un poco ansioso.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Área de entrada de texto -->
+        <div class="flex items-center space-x-4">
+            <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." class="flex-1 p-3 rounded-full border-2 border-gray-300 focus:outline-none focus:border-blue-500">
+            <button id="chat-send-btn" class="bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition-colors">
+                <span class="material-icons">send</span>
+            </button>
+        </div>
+        
+        <p class="text-center text-xs text-gray-400 mt-2">
+            Este es un chat de demostración. No se guarda ni se envía ningún mensaje.
+        </p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatInput = document.getElementById('chat-input');
+            const chatSendBtn = document.getElementById('chat-send-btn');
+            const chatMessagesContainer = document.getElementById('chat-messages-container');
+
+            // Lógica para simular el chat
+            const appendMessage = (message, sender) => {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('flex', 'items-start', 'space-x-2');
+
+                let contentHtml;
+                if (sender === 'bot') {
+                    contentHtml = `
+                        <span class="material-icons text-2xl text-blue-500">psychology</span>
+                        <div class="bg-blue-100 text-blue-800 p-3 rounded-r-2xl rounded-bl-2xl max-w-xs">
+                            <p class="text-sm font-medium">${message}</p>
+                        </div>
+                    `;
+                } else { // 'user'
+                    messageDiv.classList.add('justify-end');
+                    messageDiv.classList.remove('items-start', 'space-x-2');
+                    contentHtml = `
+                        <div class="bg-gray-700 text-white p-3 rounded-l-2xl rounded-br-2xl max-w-xs">
+                            <p class="text-sm font-medium">${message}</p>
+                        </div>
+                    `;
+                }
+                messageDiv.innerHTML = contentHtml;
+                chatMessagesContainer.appendChild(messageDiv);
+                
+                // Hace scroll al fondo
+                chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+            };
+
+            const handleSendMessage = () => {
+                const message = chatInput.value.trim();
+                if (message === '') return;
+
+                // Añade el mensaje del usuario
+                appendMessage(message, 'user');
+                chatInput.value = '';
+
+                // Simula una respuesta del bot después de un breve retraso
+                const responses = [
+                    'Entiendo. Hablar de estos sentimientos es un paso valioso. ¿Te gustaría explorar algunas estrategias para manejarlos?',
+                    'Es completamente normal sentirse así a veces. ¿Hay algo específico que te esté causando preocupación?',
+                    'Me alegra que hayas decidido compartir esto conmigo. ¿Has probado alguna técnica de relajación?',
+                    'Gracias por confiar en mí. ¿Te gustaría que hablemos sobre formas de manejar el estrés?'
+                ];
+                
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                
+                setTimeout(() => {
+                    appendMessage(randomResponse, 'bot');
+                }, 1000);
+            };
+
+            chatSendBtn.addEventListener('click', handleSendMessage);
+            chatInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    handleSendMessage();
+                }
+            });
+
+            document.getElementById('back-to-main').addEventListener('click', () => {
+                window.history.back();
+            });
+        });
+    </script>
+</body>
+</html>

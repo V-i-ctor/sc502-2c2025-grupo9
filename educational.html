@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contenido Educativo</title>
+    <!-- Tailwind CSS CDN para estilos modernos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Material Icons para los iconos -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen font-sans text-gray-800">
+    <!-- Sección de Contenido Educativo -->
+    <div class="flex-1 flex flex-col max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 animate-fade-in">
+        <!-- Botón para volver al panel principal -->
+        <button id="back-to-main" class="self-start mb-6 flex items-center text-gray-600 hover:text-blue-500 transition-colors">
+            <span class="material-icons transform rotate-180">chevron_right</span>
+            <span class="ml-2 font-medium">Volver al Panel Principal</span>
+        </button>
+
+        <!-- Título de la sección -->
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Salud Mental</h2>
+
+        <!-- Contenido sobre salud mental -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 mb-6">
+            <h3 class="text-xl font-bold mb-2">Entendiendo la Salud Mental</h3>
+            <p class="text-gray-700 mb-4">
+                La salud mental es tan importante como la salud física. Abarca nuestro bienestar emocional, psicológico y social.
+                Influye en cómo pensamos, sentimos y actuamos, y también ayuda a determinar cómo manejamos el estrés, nos relacionamos
+                con los demás y tomamos decisiones. Cuidarla es fundamental en todas las etapas de la vida.
+            </p>
+            <p class="text-gray-700">
+                Reconocer y hablar de nuestros sentimientos, practicar la atención plena (mindfulness) y buscar apoyo cuando lo necesitamos
+                son pasos vitales para mantener un buen equilibrio mental. No estás solo en este camino.
+            </p>
+        </div>
+
+        <!-- Sección adicional de recursos -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+                <div class="flex items-center mb-4">
+                    <span class="material-icons text-3xl text-teal-500 mr-3">psychology</span>
+                    <h3 class="text-xl font-bold text-gray-900">Técnicas de Mindfulness</h3>
+                </div>
+                <p class="text-gray-700 mb-4">
+                    La práctica del mindfulness puede ayudarte a mantenerte presente y reducir la ansiedad.
+                </p>
+                <ul class="list-disc list-inside text-gray-600 space-y-2">
+                    <li>Respiración consciente</li>
+                    <li>Meditación diaria</li>
+                    <li>Observación sin juicio</li>
+                    <li>Gratitud diaria</li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+                <div class="flex items-center mb-4">
+                    <span class="material-icons text-3xl text-teal-500 mr-3">favorite</span>
+                    <h3 class="text-xl font-bold text-gray-900">Autocuidado</h3>
+                </div>
+                <p class="text-gray-700 mb-4">
+                    Pequeñas acciones diarias pueden tener un gran impacto en tu bienestar general.
+                </p>
+                <ul class="list-disc list-inside text-gray-600 space-y-2">
+                    <li>Ejercicio regular</li>
+                    <li>Sueño reparador</li>
+                    <li>Alimentación saludable</li>
+                    <li>Tiempo para hobbies</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('back-to-main').addEventListener('click', () => {
+            window.history.back();
+        });
+    </script>
+</body>
+</html>
