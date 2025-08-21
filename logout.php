@@ -1,7 +1,16 @@
 <?php
+// ==========================
+// logout.php
+// Página de cierre de sesión
+//   ╱|、
+//  (˚ˎ 。7  
+//  |、˜〵          
+//  じしˍ,)ノ
+// ==========================
+
 session_start();
-session_unset(); // Limpia todas las variables de sesión
-session_destroy(); // Destruye la sesión
-header("Location: index.php"); // Redirige al inicio
+session_unset(); 
+session_destroy(); 
+header("Location: index.php"); 
 exit();
 ?>
