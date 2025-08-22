@@ -185,3 +185,37 @@ INSERT INTO citas (id_usuario, id_psicologo, fechahora, estado) VALUES
 (1, 3, '2025-08-10 09:00:00', 'Pendiente'),
 (2, 3, '2025-08-11 10:00:00', 'Confirmada'),
 (1, 3, '2025-08-12 11:00:00', 'Completada');
+
+-- Busca el ID del psicólogo
+SELECT id_usuario FROM usuarios WHERE correo = 'psicoprueba1@fakemail.com';
+-- Supongamos que el id_usuario es 5 (ajusta si es diferente)
+
+-- Crea dos pacientes de prueba
+INSERT INTO usuarios (nombre, correo, contrasena, rol, fotoperfil)
+VALUES
+('Paciente Uno', 'paciente1@correo.com', '$2y$10$abcdefghijklmnopqrstuv', 'Usuario', 'default.png'),
+('Paciente Dos', 'paciente2@correo.com', '$2y$10$abcdefghijklmnopqrstuv', 'Usuario', 'default.png');
+
+-- Busca los IDs de los pacientes recién creados
+SELECT id_usuario FROM usuarios WHERE correo = 'paciente1@correo.com';
+SELECT id_usuario FROM usuarios WHERE correo = 'paciente2@correo.com';
+-- Supongamos que son 6 y 7 (ajusta si es diferente)
+
+-- Asigna los pacientes al psicólogo
+INSERT INTO pacientes_psicologo (id_paciente, id_psicologo) VALUES
+(6, 5),
+(7, 5);
+
+-- Inserta autoevaluaciones para los pacientes
+INSERT INTO autoevaluaciones (id_usuario, fecha, estado_emocional, puntaje, recomendacion) VALUES
+(6, '2025-08-20 10:00:00', 'Triste', 3, 'Habla con alguien de confianza.'),
+(6, '2025-08-21 14:00:00', 'Ansioso', 5, 'Practica respiración profunda.'),
+(7, '2025-08-19 09:00:00', 'Feliz', 8, 'Sigue con tus hábitos positivos.'),
+(7, '2025-08-21 11:00:00', 'Cansado', 4, 'Descansa y haz ejercicio.');
+
+-- (Opcional) Inserta evaluaciones emocionales para los pacientes
+INSERT INTO evaluaciones (id_usuario, fecha, estado_emocional, notas) VALUES
+(6, '2025-08-20 10:00:00', 'Triste', 'Me sentí cansado.'),
+(6, '2025-08-21 14:00:00', 'Ansioso', 'Preocupación por tareas.'),
+(7, '2025-08-19 09:00:00', 'Feliz', 'Buen día en familia.'),
+(7, '2025-08-21 11:00:00', 'Cansado', 'Dormí poco.');
