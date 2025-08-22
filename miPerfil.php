@@ -191,8 +191,8 @@ if (!$foto) $foto = "default.png";
         <button class="btn-editar" onclick="location.href='editar_perfil.php'">Editar datos</button>
         <div class="accesos">
             <a href="historialEmocional.php">Historial emocional</a>
-            <a href="citas_programadas.php">Citas programadas</a>
-            <a href="recursos_guardados.php">Recursos guardados</a>
+            <a href="appointments.html">Citas programadas</a>
+            <a href="resources.html">Recursos guardados</a>
             <?php if (strtolower($rol) == 'psicologo'): ?>
                 <a href="panelPsicologo.php">Panel Psicólogo</a>
             <?php endif; ?>
