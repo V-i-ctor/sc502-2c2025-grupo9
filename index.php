@@ -126,6 +126,10 @@ $tipo = $logueado ? $_SESSION['tipo'] : '';
             }
         }
     </style>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <?php if ($logueado): ?>
@@ -150,6 +154,72 @@ $tipo = $logueado ? $_SESSION['tipo'] : '';
             <a href="login.php" class="btn">Iniciar Sesión</a>
         <?php endif; ?>
     </div>
+    <?php if ($logueado): ?>
+        <div class="w-full max-w-6xl mx-auto mt-12 mb-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Contenido Educativo -->
+                <a href="articulosAutoevaluacion.php" class="group relative flex flex-col items-start p-8 rounded-3xl overflow-hidden transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-xl bg-teal-400 text-white">
+                    <div class="absolute inset-0 bg-white opacity-10 blur-3xl rounded-full"></div>
+                    <div class="flex items-center justify-center p-3 rounded-full bg-white bg-opacity-20 backdrop-filter backdrop-blur-sm">
+                        <span class="material-icons text-3xl">school</span>
+                    </div>
+                    <h3 class="mt-4 text-xl font-bold">Contenido Educativo</h3>
+                    <p class="mt-1 text-sm text-white text-opacity-80">Accede rápidamente a este módulo.</p>
+                    <div class="absolute bottom-4 right-4 text-white text-opacity-80 transition-transform duration-300 group-hover:translate-x-1">
+                        <span class="material-icons">chevron_right</span>
+                    </div>
+                </a>
+                <!-- Chat en vivo -->
+                <a href="chat.html" class="group relative flex flex-col items-start p-8 rounded-3xl overflow-hidden transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-xl bg-green-400 text-white">
+                    <div class="absolute inset-0 bg-white opacity-10 blur-3xl rounded-full"></div>
+                    <div class="flex items-center justify-center p-3 rounded-full bg-white bg-opacity-20 backdrop-filter backdrop-blur-sm">
+                        <span class="material-icons text-3xl">chat</span>
+                    </div>
+                    <h3 class="mt-4 text-xl font-bold">Chat en vivo</h3>
+                    <p class="mt-1 text-sm text-white text-opacity-80">Accede rápidamente a este módulo.</p>
+                    <div class="absolute bottom-4 right-4 text-white text-opacity-80 transition-transform duration-300 group-hover:translate-x-1">
+                        <span class="material-icons">chevron_right</span>
+                    </div>
+                </a>
+                <!-- Citas programadas -->
+                <a href="appointments.html" class="group relative flex flex-col items-start p-8 rounded-3xl overflow-hidden transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-xl bg-blue-400 text-white">
+                    <div class="absolute inset-0 bg-white opacity-10 blur-3xl rounded-full"></div>
+                    <div class="flex items-center justify-center p-3 rounded-full bg-white bg-opacity-20 backdrop-filter backdrop-blur-sm">
+                        <span class="material-icons text-3xl">event_note</span>
+                    </div>
+                    <h3 class="mt-4 text-xl font-bold">Citas programadas</h3>
+                    <p class="mt-1 text-sm text-white text-opacity-80">Accede rápidamente a este módulo.</p>
+                    <div class="absolute bottom-4 right-4 text-white text-opacity-80 transition-transform duration-300 group-hover:translate-x-1">
+                        <span class="material-icons">chevron_right</span>
+                    </div>
+                </a>
+                <!-- Recursos guardados -->
+                <a href="resources.html" class="group relative flex flex-col items-start p-8 rounded-3xl overflow-hidden transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-xl bg-purple-400 text-white">
+                    <div class="absolute inset-0 bg-white opacity-10 blur-3xl rounded-full"></div>
+                    <div class="flex items-center justify-center p-3 rounded-full bg-white bg-opacity-20 backdrop-filter backdrop-blur-sm">
+                        <span class="material-icons text-3xl">bookmark</span>
+                    </div>
+                    <h3 class="mt-4 text-xl font-bold">Recursos guardados</h3>
+                    <p class="mt-1 text-sm text-white text-opacity-80">Accede rápidamente a este módulo.</p>
+                    <div class="absolute bottom-4 right-4 text-white text-opacity-80 transition-transform duration-300 group-hover:translate-x-1">
+                        <span class="material-icons">chevron_right</span>
+                    </div>
+                </a>
+                <!-- Autoevaluaciones -->
+                <a href="auto.html" class="group relative flex flex-col items-start p-8 rounded-3xl overflow-hidden transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-xl bg-pink-400 text-white">
+                    <div class="absolute inset-0 bg-white opacity-10 blur-3xl rounded-full"></div>
+                    <div class="flex items-center justify-center p-3 rounded-full bg-white bg-opacity-20 backdrop-filter backdrop-blur-sm">
+                        <span class="material-icons text-3xl">psychology</span>
+                    </div>
+                    <h3 class="mt-4 text-xl font-bold">Autoevaluaciones</h3>
+                    <p class="mt-1 text-sm text-white text-opacity-80">Accede a tus autoevaluaciones y recursos.</p>
+                    <div class="absolute bottom-4 right-4 text-white text-opacity-80 transition-transform duration-300 group-hover:translate-x-1">
+                        <span class="material-icons">chevron_right</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    <?php endif; ?>
 
     <footer>
         <p class="mb-2">📞 Teléfono: <span class="font-semibold">+506 1234-5678</span> | ✉️ Correo: <span class="font-semibold">saludmental@ficticio.com</span></p>

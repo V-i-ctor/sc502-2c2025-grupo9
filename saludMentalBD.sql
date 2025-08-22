@@ -1,4 +1,4 @@
--- Base de datos
+-- Base de datos principal
 CREATE DATABASE IF NOT EXISTS salud_mental;
 USE salud_mental;
 
@@ -12,23 +12,32 @@ CREATE TABLE IF NOT EXISTS usuarios (
     fotoperfil VARCHAR(255) DEFAULT 'default.png'
 );
 
--- Tabla: psicologos_especialidades
-CREATE TABLE IF NOT EXISTS psicologos_especialidades (
+-- Especialidades de psicólogos
+CREATE TABLE IF NOT EXISTS especialidades (
     id_especialidad INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100),
     descripcion TEXT
 );
 
--- Tabla intermedia: usuario_especialidad (usuarios tipo profesional)
+-- Relación usuario-especialidad (solo para psicólogos)
 CREATE TABLE IF NOT EXISTS usuario_especialidad (
     id_usuario INT,
     id_especialidad INT,
     PRIMARY KEY (id_usuario, id_especialidad),
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
-    FOREIGN KEY (id_especialidad) REFERENCES psicologos_especialidades(id_especialidad) ON DELETE CASCADE
+    FOREIGN KEY (id_especialidad) REFERENCES especialidades(id_especialidad) ON DELETE CASCADE
 );
 
--- Tabla: autoevaluaciones
+-- Relación entre pacientes y psicólogos
+CREATE TABLE IF NOT EXISTS pacientes_psicologo (
+    id_paciente INT NOT NULL,
+    id_psicologo INT NOT NULL,
+    PRIMARY KEY (id_paciente, id_psicologo),
+    FOREIGN KEY (id_paciente) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
+    FOREIGN KEY (id_psicologo) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+);
+
+-- Autoevaluaciones (historial emocional)
 CREATE TABLE IF NOT EXISTS autoevaluaciones (
     id_autoevaluacion INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT,
@@ -39,7 +48,7 @@ CREATE TABLE IF NOT EXISTS autoevaluaciones (
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
 
--- Tabla: tecnicas
+-- Técnicas y recursos
 CREATE TABLE IF NOT EXISTS tecnicas (
     id_tecnica INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(100),
@@ -48,7 +57,7 @@ CREATE TABLE IF NOT EXISTS tecnicas (
     url_recurso TEXT
 );
 
--- Tabla: tecnicas_aplicadas (relación usuarios ↔ técnicas)
+-- Técnicas aplicadas (relación usuarios ↔ técnicas)
 CREATE TABLE IF NOT EXISTS tecnicas_aplicadas (
     id_tecnica_aplicada INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT,
@@ -58,7 +67,7 @@ CREATE TABLE IF NOT EXISTS tecnicas_aplicadas (
     FOREIGN KEY (id_tecnica) REFERENCES tecnicas(id_tecnica) ON DELETE CASCADE
 );
 
--- Tabla: reportes_emocionales
+-- Reportes emocionales (pueden ser generados por el sistema o el psicólogo)
 CREATE TABLE IF NOT EXISTS reportes_emocionales (
     id_reporte INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT,
@@ -67,7 +76,7 @@ CREATE TABLE IF NOT EXISTS reportes_emocionales (
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
 
--- Tabla: sesiones_chat
+-- Sesiones de chat (texto o videollamada)
 CREATE TABLE IF NOT EXISTS sesiones_chat (
     id_chat INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario_joven INT,
@@ -79,7 +88,7 @@ CREATE TABLE IF NOT EXISTS sesiones_chat (
     FOREIGN KEY (id_usuario_pro) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
 
--- Tabla: mensajes_chat
+-- Mensajes de chat
 CREATE TABLE IF NOT EXISTS mensajes_chat (
     id_mensaje INT AUTO_INCREMENT PRIMARY KEY,
     id_chat INT,
@@ -90,132 +99,113 @@ CREATE TABLE IF NOT EXISTS mensajes_chat (
     FOREIGN KEY (id_emisor) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
 
--- Tabla de evaluaciones emocionales
-CREATE TABLE IF NOT EXISTS evaluaciones (
-    id_evaluacion INT AUTO_INCREMENT PRIMARY KEY,
-    id_usuario INT NOT NULL,
-    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
-    estado_emocional VARCHAR(50) NOT NULL,
-    notas TEXT,
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
-);
-
--- Relación entre pacientes y psicólogos
-CREATE TABLE IF NOT EXISTS pacientes_psicologo (
-    id_paciente INT NOT NULL,
-    id_psicologo INT NOT NULL,
-    PRIMARY KEY (id_paciente, id_psicologo),
-    FOREIGN KEY (id_paciente) REFERENCES usuarios(id_usuario),
-    FOREIGN KEY (id_psicologo) REFERENCES usuarios(id_usuario)
-);
-
--- Tabla de citas
+-- Citas entre usuario y psicólogo
 CREATE TABLE IF NOT EXISTS citas (
     id_cita INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
     id_psicologo INT NOT NULL,
     fechahora DATETIME NOT NULL,
     estado ENUM('Pendiente','Confirmada','Cancelada','Completada') DEFAULT 'Pendiente',
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
-    FOREIGN KEY (id_psicologo) REFERENCES usuarios(id_usuario)
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
+    FOREIGN KEY (id_psicologo) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
 
--- Usuarios (2 pacientes, 1 psicólogo)
-INSERT INTO usuarios (nombre, correo, contrasena, rol, fotoperfil) VALUES
+-- Recursos guardados por usuarios (opcional, para favoritos)
+CREATE TABLE IF NOT EXISTS recursos_guardados (
+    id_guardado INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT,
+    id_tecnica INT,
+    fecha_guardado DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
+    FOREIGN KEY (id_tecnica) REFERENCES tecnicas(id_tecnica) ON DELETE CASCADE
+);
+
+-- Artículos
+CREATE TABLE IF NOT EXISTS articulos (
+    id_articulo INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    resumen VARCHAR(255),
+    contenido TEXT NOT NULL,
+    autor VARCHAR(100),
+    fecha_publicacion DATE,
+    imagen_url VARCHAR(255)
+);
+
+-- DATOS DE PRUEBA
+
+-- Usuarios (2 pacientes, 2 psicólogos)
+INSERT IGNORE INTO usuarios (nombre, correo, contrasena, rol, fotoperfil) VALUES
 ('Ana López', 'ana@correo.com', '$2y$10$abcdefghijklmnopqrstuv', 'Usuario', 'ana.png'),
 ('Carlos Ruiz', 'carlos@correo.com', '$2y$10$abcdefghijklmnopqrstuv', 'Usuario', 'carlos.png'),
+('FER el PSICOLOGO', 'psicoprueba1@fakemail.com', '$2y$10$U6EZ3lnndiLScBWSmAjb/.PXLPaB5Z4dk9WqlETl4uKR1yGy.Oj1e', 'Psicologo', 'default.png'),
 ('Dra. Sofia Mendez', 'sofia@psico.com', '$2y$10$abcdefghijklmnopqrstuv', 'Psicologo', 'sofia.png');
-INSERT INTO `usuarios` (`id_usuario`, `nombre`, `correo`, `contrasena`, `rol`, `fotoperfil`) VALUES (NULL, 'FEEEEEEEER', 'prueba1@correofalso.com', '$2y$10$tPrSNy5iLON/DZt9dg.yH.b.6SYx3lFZRa89mys0mzUugT2hiw9ue', 'Usuario', 'default.png'), (NULL, 'FER el PSICOLOGO', 'psicoprueba1@fakemail.com', '$2y$10$U6EZ3lnndiLScBWSmAjb/.PXLPaB5Z4dk9WqlETl4uKR1yGy.Oj1e', 'Psicologo', 'default.png')
--- Especialidades de psicólogos
-INSERT INTO psicologos_especialidades (nombre, descripcion) VALUES
+
+-- Especialidades
+INSERT IGNORE INTO especialidades (nombre, descripcion) VALUES
 ('Ansiedad', 'Tratamiento de trastornos de ansiedad'),
 ('Depresion', 'Especialista en depresion'),
 ('Adolescentes', 'Atencion a adolescentes');
 
--- Relación usuario-especialidad (psicólogo)
-INSERT INTO usuario_especialidad (id_usuario, id_especialidad) VALUES
-(3, 1), (3, 2), (3, 3);
+-- Relación usuario-especialidad (psicólogos)
+INSERT IGNORE INTO usuario_especialidad (id_usuario, id_especialidad) VALUES
+(3, 1), (3, 2), (3, 3),
+(4, 1);
 
 -- Relación pacientes-psicólogo
-INSERT INTO pacientes_psicologo (id_paciente, id_psicologo) VALUES
-(1, 3), (2, 3);
+INSERT IGNORE INTO pacientes_psicologo (id_paciente, id_psicologo) VALUES
+(1, 3), (2, 3), (1, 4);
 
 -- Técnicas
-INSERT INTO tecnicas (titulo, descripcion, tipo, url_recurso) VALUES
+INSERT IGNORE INTO tecnicas (titulo, descripcion, tipo, url_recurso) VALUES
 ('Respiracion profunda', 'Ejercicio de respiracion para reducir ansiedad', 'audio', 'audio1.mp3'),
 ('Diario emocional', 'Escribe tus emociones diariamente', 'texto', 'diario.pdf'),
 ('Relajacion muscular', 'Relajacion progresiva guiada', 'video', 'relajacion.mp4');
 
 -- Técnicas aplicadas
-INSERT INTO tecnicas_aplicadas (id_usuario, id_tecnica) VALUES
+INSERT IGNORE INTO tecnicas_aplicadas (id_usuario, id_tecnica) VALUES
 (1, 1), (1, 2), (2, 3);
 
--- Autoevaluaciones
-INSERT INTO autoevaluaciones (id_usuario, fecha, estado_emocional, puntaje, recomendacion) VALUES
+-- Autoevaluaciones (historial emocional)
+INSERT IGNORE INTO autoevaluaciones (id_usuario, fecha, estado_emocional, puntaje, recomendacion) VALUES
 (1, '2025-08-01 10:00:00', 'Triste', 3, 'Habla con alguien de confianza.'),
 (1, '2025-08-05 14:00:00', 'Ansioso', 5, 'Practica respiracion profunda.'),
-(2, '2025-08-03 09:00:00', 'Feliz', 8, 'Sigue con tus habitos positivos.');
-
--- Evaluaciones emocionales
-INSERT INTO evaluaciones (id_usuario, fecha, estado_emocional, notas) VALUES
-(1, '2025-08-01 10:00:00', 'Triste', 'Me senti cansada.'),
-(1, '2025-08-05 14:00:00', 'Ansioso', 'Preocupacion por examenes.'),
-(2, '2025-08-03 09:00:00', 'Feliz', 'Buen dia en familia.');
+(2, '2025-08-03 09:00:00', 'Feliz', 8, 'Sigue con tus habitos positivos.'),
+(1, '2025-08-20 10:00:00', 'Triste', 3, 'Habla con alguien de confianza.'),
+(1, '2025-08-21 14:00:00', 'Ansioso', 5, 'Practica respiración profunda.'),
+(2, '2025-08-19 09:00:00', 'Feliz', 8, 'Sigue con tus hábitos positivos.'),
+(2, '2025-08-21 11:00:00', 'Cansado', 4, 'Descansa y haz ejercicio.');
 
 -- Reportes emocionales
-INSERT INTO reportes_emocionales (id_usuario, fecha_generado, contenido) VALUES
+INSERT IGNORE INTO reportes_emocionales (id_usuario, fecha_generado, contenido) VALUES
 (1, '2025-08-06 12:00:00', 'Reporte semanal de Ana'),
 (2, '2025-08-06 12:00:00', 'Reporte semanal de Carlos'),
 (1, '2025-08-13 12:00:00', 'Reporte semanal de Ana (2)');
 
 -- Sesiones de chat
-INSERT INTO sesiones_chat (id_usuario_joven, id_usuario_pro, fecha_inicio, tipo_sesion) VALUES
+INSERT IGNORE INTO sesiones_chat (id_usuario_joven, id_usuario_pro, fecha_inicio, tipo_sesion) VALUES
 (1, 3, '2025-08-01 15:00:00', 'texto'),
 (2, 3, '2025-08-02 16:00:00', 'videollamada'),
 (1, 3, '2025-08-03 17:00:00', 'texto');
 
 -- Mensajes de chat
-INSERT INTO mensajes_chat (id_chat, id_emisor, contenido) VALUES
+INSERT IGNORE INTO mensajes_chat (id_chat, id_emisor, contenido) VALUES
 (1, 1, 'Hola, necesito ayuda.'),
 (1, 3, 'Hola Ana, ¿como te sientes hoy?'),
 (2, 2, 'Buenas tardes, doctora.');
 
 -- Citas
-INSERT INTO citas (id_usuario, id_psicologo, fechahora, estado) VALUES
+INSERT IGNORE INTO citas (id_usuario, id_psicologo, fechahora, estado) VALUES
 (1, 3, '2025-08-10 09:00:00', 'Pendiente'),
 (2, 3, '2025-08-11 10:00:00', 'Confirmada'),
 (1, 3, '2025-08-12 11:00:00', 'Completada');
 
--- Busca el ID del psicólogo
-SELECT id_usuario FROM usuarios WHERE correo = 'psicoprueba1@fakemail.com';
--- Supongamos que el id_usuario es 5 (ajusta si es diferente)
+-- Recursos guardados (ejemplo)
+INSERT IGNORE INTO recursos_guardados (id_usuario, id_tecnica) VALUES
+(1, 1), (2, 2);
 
--- Crea dos pacientes de prueba
-INSERT INTO usuarios (nombre, correo, contrasena, rol, fotoperfil)
-VALUES
-('Paciente Uno', 'paciente1@correo.com', '$2y$10$abcdefghijklmnopqrstuv', 'Usuario', 'default.png'),
-('Paciente Dos', 'paciente2@correo.com', '$2y$10$abcdefghijklmnopqrstuv', 'Usuario', 'default.png');
+INSERT IGNORE INTO articulos (titulo, contenido, autor, fecha_publicacion) VALUES
+('¿Qué es la autoevaluación emocional?', 'La autoevaluación emocional es una herramienta para conocer tu estado de ánimo...', 'Equipo Salud Mental', '2025-08-21'),
+('Técnicas para manejar la ansiedad', 'Respiración profunda, meditación y ejercicio pueden ayudarte a controlar la ansiedad.', 'Psic. Sofía Méndez', '2025-08-20'),
+('Importancia de pedir ayuda', 'Buscar apoyo profesional es un acto de valentía y autocuidado.', 'Equipo Salud Mental', '2025-08-19');
 
--- Busca los IDs de los pacientes recién creados
-SELECT id_usuario FROM usuarios WHERE correo = 'paciente1@correo.com';
-SELECT id_usuario FROM usuarios WHERE correo = 'paciente2@correo.com';
--- Supongamos que son 6 y 7 (ajusta si es diferente)
-
--- Asigna los pacientes al psicólogo
-INSERT INTO pacientes_psicologo (id_paciente, id_psicologo) VALUES
-(6, 5),
-(7, 5);
-
--- Inserta autoevaluaciones para los pacientes
-INSERT INTO autoevaluaciones (id_usuario, fecha, estado_emocional, puntaje, recomendacion) VALUES
-(6, '2025-08-20 10:00:00', 'Triste', 3, 'Habla con alguien de confianza.'),
-(6, '2025-08-21 14:00:00', 'Ansioso', 5, 'Practica respiración profunda.'),
-(7, '2025-08-19 09:00:00', 'Feliz', 8, 'Sigue con tus hábitos positivos.'),
-(7, '2025-08-21 11:00:00', 'Cansado', 4, 'Descansa y haz ejercicio.');
-
--- (Opcional) Inserta evaluaciones emocionales para los pacientes
-INSERT INTO evaluaciones (id_usuario, fecha, estado_emocional, notas) VALUES
-(6, '2025-08-20 10:00:00', 'Triste', 'Me sentí cansado.'),
-(6, '2025-08-21 14:00:00', 'Ansioso', 'Preocupación por tareas.'),
-(7, '2025-08-19 09:00:00', 'Feliz', 'Buen día en familia.'),
-(7, '2025-08-21 11:00:00', 'Cansado', 'Dormí poco.');
+$sql = "SELECT titulo, descripcion, url_recurso AS url, fecha FROM tecnicas WHERE tipo = 'video' ORDER BY fecha DESC";

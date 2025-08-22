@@ -14,7 +14,7 @@ require_once __DIR__ . '/app/config/db.php';
     <header class="w-full bg-white shadow-md p-4 flex justify-between items-center relative rounded-b-lg mb-8">
         <h1 class="text-3xl font-extrabold text-green-600 ml-4 md:ml-8">Gestión de Videos</h1>
         <div>
-            <button onclick="location.href='index.html'" 
+            <button onclick="location.href='index.php'" 
                 class="bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg shadow hover:bg-gray-400 transition">
                 Volver
             </button>

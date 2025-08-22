@@ -1,34 +1,43 @@
+<?php
+// Ejemplo de videos (puedes reemplazar por consulta a la base de datos)
+$videos = [
+    [
+        'titulo' => 'Respiración para la calma',
+        'descripcion' => 'Aprende una técnica sencilla de respiración para reducir la ansiedad.',
+        'url' => 'https://www.youtube.com/embed/1min_video_id',
+        'fecha' => '2025-08-21'
+    ],
+    [
+        'titulo' => 'Relajación muscular progresiva',
+        'descripcion' => 'Guía paso a paso para relajar tu cuerpo y mente.',
+        'url' => 'https://www.youtube.com/embed/2min_video_id',
+        'fecha' => '2025-08-20'
+    ],
+    [
+        'titulo' => 'Meditación guiada para principiantes',
+        'descripcion' => 'Una meditación corta para empezar el día con energía positiva.',
+        'url' => 'https://www.youtube.com/embed/3min_video_id',
+        'fecha' => '2025-08-19'
+    ]
+];
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Videos Educativos</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Videos de Autoevaluación</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col items-center text-gray-800">
+<body class="bg-gradient-to-br from-blue-100 to-blue-200 min-h-screen flex flex-col items-center text-gray-800">
 
-    <header class="w-full bg-white shadow-md p-4 flex justify-between items-center relative rounded-b-lg">
-        <h1 class="text-3xl font-extrabold text-blue-600 ml-4 md:ml-8">Videos Educativos</h1>
-        <div>
-            <button onclick="location.href='index.html'" 
-                class="bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg shadow hover:bg-gray-400 transition">
-                Volver
-            </button>
-        </div>
+    <header class="w-full bg-white shadow-md p-4 flex justify-between items-center rounded-b-2xl">
+        <h1 class="text-3xl font-extrabold text-blue-700 ml-2">Videos de Autoevaluación</h1>
+        <button onclick="location.href='index.php'"
+            class="flex items-center gap-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-xl shadow transition">
+            <span class="material-icons">arrow_back</span>
+            Volver
+        </button>
     </header>
 
-    <main class="flex-grow w-full max-w-4xl p-4 md:p-8 mt-8">
-        <div id="lista-videos" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <?php include 'listar_videos.php'; ?>
-        </div>
-    </main>
-
-    <footer class="w-full bg-gray-800 text-white p-6 text-center mt-auto rounded-t-lg shadow-inner">
-        <p class="mb-2">📞 Teléfono: <span class="font-semibold">+506 1234-5678</span> | ✉️ Correo: <span
-                class="font-semibold">saludmental@ficticio.com</span></p>
-        <p class="mb-2">🌐 Redes: <span class="font-semibold">@SaludMentalCR</span> en Instagram, Facebook y Twitter</p>
-        <p class="text-gray-400 text-sm">© 2025 Salud Mental. Todos los derechos reservados.</p>
-    </footer>
-</body>
-</html>
+    <main class="flex-grow w-full max-w-5xl p-4 md:p-8 mt-8">
