@@ -1,5 +1,4 @@
 <?php
-// Ejemplo de artículos (puedes reemplazar por consulta a la base de datos)
 $articulos = [
     [
         'titulo' => '¿Qué es la autoevaluación emocional?',

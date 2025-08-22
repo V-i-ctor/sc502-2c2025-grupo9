@@ -1,5 +1,4 @@
 <?php
-// Ejemplo de videos (puedes reemplazar por consulta a la base de datos)
 $videos = [
     [
         'titulo' => 'Respiración para la calma',
