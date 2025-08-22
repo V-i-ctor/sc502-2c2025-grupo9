@@ -15,6 +15,10 @@ if (!isset($_SESSION['id_usuario'])) {
 
 $id_usuario = $_SESSION['id_usuario'];
 
+if (isset($_GET['id_paciente']) && strtolower($_SESSION['tipo']) == 'psicologo') {
+    $id_usuario = intval($_GET['id_paciente']);
+}
+
 $conexion = new mysqli("localhost", "root", "", "salud_mental");if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
@@ -215,10 +219,9 @@ $conexion->close();
                 </tr>
             <?php endif; ?>
         </table>
-
-    </div>
-    <div class="volver">
-        <a href="miperfil.php">Volver a mi perfil</a>
+        <div class="volver">
+            <a href="miperfil.php">Volver a mi perfil</a>
+        </div>
     </div>
     <footer class="footer-custom">
         <p class="mb-2">📞 Teléfono: <span class="font-semibold">+506 1234-5678</span> | ✉️ Correo: <span class="font-semibold">saludmental@ficticio.com</span></p>
